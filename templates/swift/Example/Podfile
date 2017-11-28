@@ -1,0 +1,16 @@
+# 公有仓库
+source 'https://github.com/CocoaPods/Specs.git'
+## 私有仓库
+source 'https://git.nya.pics/Ligo/LigoPods.git'
+
+use_frameworks!
+
+target '${POD_NAME}_Example' do
+  pod '${POD_NAME}', :path => '../'
+
+  target '${POD_NAME}_Tests' do
+    inherit! :search_paths
+
+    ${INCLUDED_PODS}
+  end
+end

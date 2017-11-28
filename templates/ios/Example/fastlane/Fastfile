@@ -1,0 +1,70 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.32.1"
+
+default_platform :ios
+
+platform :ios do
+  before_all do
+    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    
+    
+  end
+
+  desc "Lint for Cocoapod"
+  lane :push_pod do
+      Actions.sh("cd ../../ && ls && ./upload.sh")
+  end
+
+ 
+ desc "Release new version"
+  lane :release do |options|
+      target_version = options[:version]
+      raise "The version is missed. Use `fastlane release version:{version_number}`.`" if target_version.nil?
+      
+      increment_version_number(version_number: target_version)
+      version_bump_podspec(path: "../${POD_NAME}.podspec", version_number: target_version)
+      Actions.sh("cd ../")
+      Actions.sh("git add .")
+      Actions.sh("git commit -m 'Bump version to #{target_version}' .")
+      Actions.sh("git tag #{target_version}")
+      Actions.sh("git push origin master #{target_version}")
+
+      push_pod
+  end
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used. No personal data is recorded. 
+# Learn more at https://github.com/fastlane/fastlane#metrics
+
+
