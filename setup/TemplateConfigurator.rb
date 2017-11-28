@@ -118,10 +118,10 @@ module Pod
         end
         
         def enter_git_info
-#            http_url = nil
-#            ssl_url = nil
-#            page_url = nil
-
+            #            http_url = nil
+            #            ssl_url = nil
+            #            page_url = nil
+            
             loop do
                 @http_url = self.ask("Enter HTTPS Repo URL")
                 
@@ -131,7 +131,7 @@ module Pod
                     break
                 end
             end
-
+            
             loop do
                 @ssl_url = self.ask("Enter SSH Repo URL")
                 
@@ -141,17 +141,17 @@ module Pod
                     break
                 end
             end
-
+            
             loop do
                 @home_page_url = self.ask("Enter Home Page URL")
-
+                
                 if @home_page_url.include?(' ')
                     puts 'Your class Home Page cannot contain spaces.'.red
                     else
                     break
                 end
             end
-
+            
         end
         
         
@@ -264,3 +264,4 @@ module Pod
         #----------------------------------------#
     end
 end
+
