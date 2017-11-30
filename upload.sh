@@ -1,1 +1,1 @@
-pod trunk push LigoPods ${POD_NAME}.podspec --verbose --allow-warnings --use-libraries
+pod trunk push ${POD_NAME}.podspec --verbose --allow-warnings --use-libraries
