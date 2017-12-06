@@ -1,7 +1,5 @@
 # 公有仓库
 source 'https://github.com/CocoaPods/Specs.git'
-## 私有仓库
-source 'https://git.nya.pics/Ligo/LigoPods.git'
 
 use_frameworks!
 

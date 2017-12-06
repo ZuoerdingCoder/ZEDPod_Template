@@ -221,7 +221,7 @@ module Pod
             `rm -rf .git`
             `git init`
             `git add -A`
-            `git remote add origin "#{ssl_url}"`
+            `git remote add origin "#{http_url}"`
             
         end
         
